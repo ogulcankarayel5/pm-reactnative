@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+       
+
+import React from "react";
+import LoadAssets from "./src/components/LoadAssets";
+import { ThemeProvider, Box,Text } from "./src/utils/Theme";
+import { useOrientation } from './src/hooks/useOrientation';
+import { Home } from "./src/components/Home";
+
+
+
+//LoadAssets font,navigation ve asset caching için
+
+
+
+const fonts = {
+  RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),
+};
+
+const assets = [
+  "https://res.cloudinary.com/ogulcankarayel-digital/image/upload/v1598991377/2942057-removebg-preview_1_1_no1tjb.png",
+  "https://res.cloudinary.com/ogulcankarayel-digital/image/upload/v1599030254/2892856-removebg_1_1_vl6gyl.png",
+];
 
 export default function App() {
+  
+  const orientation = useOrientation();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <LoadAssets {...{ fonts, assets }}>
+      <Text>orientation: {orientation}</Text>
+      <Home/>
+      </LoadAssets>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -1,4 +1,7 @@
 {
+  "name": "reactnativePasswordManager",
+  "version": "1.0.0",
+  "description": "",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -8,11 +11,25 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~38.0.8",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/drawer": "^5.9.0",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
+    "@shopify/restyle": "^1.2.0",
+    "@types/styled-components": "^5.1.2",
+    "@types/styled-system": "^5.1.10",
+    "expo": "^38.0.10",
+    "expo-asset": "~8.1.7",
+    "expo-constants": "~9.1.1",
+    "expo-font": "~8.2.1",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.9.0",
+    "react-native-safe-area-context": "~3.0.7",
+    "react-native-screens": "~2.9.0",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
@@ -21,5 +38,8 @@
     "@types/react-native": "~0.62.13",
     "typescript": "~3.9.5"
   },
-  "private": true
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
