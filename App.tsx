@@ -1,10 +1,9 @@
        
 
 import React from "react";
-import LoadAssets from "./src/components/LoadAssets";
-import { ThemeProvider, Box,Text } from "./src/utils/Theme";
+import LoadAssets from "./src/components";
+import { ThemeProvider, Box,Text } from "./src/utils";
 import { useOrientation } from './src/hooks/useOrientation';
-import { Home } from "./src/components/Home";
 
 
 
@@ -27,8 +26,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <LoadAssets {...{ fonts, assets }}>
-      <Text>orientation: {orientation}</Text>
-      <Home/>
+      
       </LoadAssets>
     </ThemeProvider>
   );
