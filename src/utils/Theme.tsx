@@ -3,24 +3,28 @@ import React,{ ReactNode } from "react";
 import { createText, createBox,useTheme as useReTheme,ThemeProvider as ReStyleThemeProvider } from "@shopify/restyle";
 import { widthPercentageToDP } from "../hooks/useOrientation";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { NamedStyles } from "../types";
 
 const palette = {
-  purple: '#5A31F4',
+ 
   white: '#FFF',
   black: '#111',
-  darkGray: '#333',
+  lightBlue:"#346E93",
   lightGray: '#EEE',
   };
 
   const theme = {
     colors: {
-      mainBackground: palette.lightGray,
+      mainBackground: palette.white,
       mainForeground: palette.black,
-  
-      primaryCardBackground: palette.purple,
-      secondaryCardBackground: palette.white,
-      primaryCardText: palette.white,
-      secondaryCardText: palette.black,
+      mainButtonTextColor:palette.white,
+      onboardingButtonColor : palette.lightBlue,
+      onboardingButtonTextColor:palette.white,
+      primaryTitle:"#0A2648",
+      primaryText:"#688AA3",
+      purple:"#412390",
+     
+    
     },
     spacing: {
       none: 0,
@@ -37,6 +41,29 @@ const palette = {
       m:16,
       l:24,
       xl:48
+    },
+    textVariants:{
+      mainTitle:{
+        color:"primaryTitle",
+        fontSize:widthPercentageToDP("6%"),
+       
+        fontFamily:"Oswald",
+        textAlign:"center"
+      },
+      mainText:{
+        color:"primaryText",
+        letterSpacing:1.1,
+        fontFamily:"RobotoRegular",
+        fontWeight:"700",
+        fontSize:widthPercentageToDP("4%"),
+        textAlign:"center"
+      },
+      button:{
+        color:"mainButtonTextColor",
+        fontSize:widthPercentageToDP("3%"),
+        fontFamily:"Oswald",
+        fontWeight:"bold"
+      }
     },
     // cardVariants: {
     //   regular: {
@@ -58,9 +85,7 @@ const palette = {
     //     elevation: 5,
     //   }
     // }
-    textVariants: {
-     
-    },
+   
     breakpoints: {
       phone:0,
       tablet: 768,
@@ -75,15 +100,16 @@ export const ThemeProvider = ({children}:{children:ReactNode}) => (
 export type Theme = typeof theme;
 export const Text = createText<Theme>();
 export const Box = createBox<Theme>();
+
 export const useTheme = () => useReTheme<Theme>();
 
 
 //theme objesini component dışında kullanabilmek için
-type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle };
 
-export const makeStyles = <T extends NamedStyles<T>>(
+
+export const makeStyles = <T extends NamedStyles<T> | NamedStyles<any>>(
   styles: (theme: Theme) => T
-) => () => {
+) =>  <T extends NamedStyles<T> | NamedStyles<any>>() => {
   const currentTheme = useTheme();
   return styles(currentTheme);
 };

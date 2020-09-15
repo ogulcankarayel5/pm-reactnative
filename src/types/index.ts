@@ -1,0 +1,1 @@
+export {NamedStyles} from "./style-type";
