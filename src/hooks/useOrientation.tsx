@@ -16,6 +16,7 @@ export let { width, height } = Dimensions.get("window");
  * @return {number}              The calculated dp depending on current device's screen width.
  */
 export const widthPercentageToDP = (widthPercent: string | number): number => {
+  
   //console.log(width);
   // Parse string percentage input and convert it to number.
   const elemWidth =
@@ -23,7 +24,7 @@ export const widthPercentageToDP = (widthPercent: string | number): number => {
 
   // Use PixelRatio.roundToNearestPixel method in order to round the layout
   // size (dp) to the nearest one that correspons to an integer number of pixels.
-  console.log(PixelRatio.roundToNearestPixel((width * elemWidth) / 100))
+ 
   return PixelRatio.roundToNearestPixel((width * elemWidth) / 100);
 };
 
@@ -76,5 +77,5 @@ export const useOrientation = () => {
       return () => Dimensions.removeEventListener("change", () => {});
     });
   
-    return orientation;
+    return {orientation,width,height};
   };
