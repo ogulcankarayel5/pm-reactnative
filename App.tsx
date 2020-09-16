@@ -1,14 +1,11 @@
        
 
-import React from "react";
-import LoadAssets from "./src/components";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ThemeProvider, Box,Text } from "./src/utils";
-import { useOrientation } from './src/hooks/useOrientation';
-import { AppRoutes } from "./src/types/navigation-type";
+import React from "react";
+import { LoadAssets } from "./src/components";
 import { AuthenticationNavigator } from "./src/navigation/auth-navigation";
-import { useFonts } from "expo-font";
-import { AppLoading } from "expo";
+import { AppRoutes } from "./src/types/navigation-type";
+import { ThemeProvider } from "./src/utils";
 
 
 

@@ -1,8 +1,7 @@
 
-import React,{ ReactNode } from "react";
-import { createText, createBox,useTheme as useReTheme,ThemeProvider as ReStyleThemeProvider } from "@shopify/restyle";
+import { createBox, createText, ThemeProvider as ReStyleThemeProvider, useTheme as useReTheme } from "@shopify/restyle";
+import React, { ReactNode } from "react";
 import { widthPercentageToDP } from "../hooks/useOrientation";
-import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { NamedStyles } from "../types";
 
 const palette = {
@@ -60,7 +59,7 @@ const palette = {
       },
       button:{
         color:"mainButtonTextColor",
-        fontSize:widthPercentageToDP("3%"),
+        fontSize:widthPercentageToDP("3.75%"),
         fontFamily:"Oswald",
         fontWeight:"bold"
       }
