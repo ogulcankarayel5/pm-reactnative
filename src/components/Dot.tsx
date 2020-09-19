@@ -1,25 +1,29 @@
 import React from "react";
-import Animated, { interpolate, Extrapolate } from "react-native-reanimated";
+import { Animated } from "react-native";
+
 
 
 interface DotProps {
   index: number;
-  currentIndex: Animated.Node<number>;
+  currentIndex:any;
 }
 const Dot = ({currentIndex,index}:DotProps) => {
 
-  const opacity = interpolate(currentIndex,{
+
+  const opacity =currentIndex.interpolate({
     inputRange:[index-1,index,index+1],
     outputRange:[0.5,1,0.5],
-    extrapolate:Extrapolate.CLAMP,
-    
+    extrapolate:"clamp"
   })
+  
 
-  const scale = interpolate(currentIndex,{
+  const scale = currentIndex.interpolate({
     inputRange:[index-1,index,index+1],
     outputRange:[1,1.5,1],
-    extrapolate:Extrapolate.CLAMP,
+    extrapolate:"clamp"
   })
+
+  
  
   return (
     <Animated.View

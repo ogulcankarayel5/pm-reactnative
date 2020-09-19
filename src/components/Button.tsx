@@ -1,60 +1,75 @@
-import {
-  ResponsiveValue
-} from "@shopify/restyle";
+import { useDimensions } from "@react-native-community/hooks";
 import React from "react";
-import { StyleSheet } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
-import { baseStyles, Box, Text, Theme, useTheme } from "../utils";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps
+} from "react-native";
+import { baseStyles, Text, Theme, useTheme } from "../utils";
 
 const styles = StyleSheet.create({
   container: {
     ...baseStyles.center,
   },
 });
-interface ButtonProps {
+
+type Size = "small" | "medium" | "large";
+
+interface ButtonProps extends TouchableOpacityProps {
   onPress: () => void;
-  label: string;
+  children: string;
   color?: keyof Theme["colors"];
-  backgroundColor: keyof Theme["colors"];
-  padding?: ResponsiveValue<keyof Theme["spacing"], Theme>;
-  borderRadius?: ResponsiveValue<keyof Theme["borderRadii"], Theme>;
-  width?: number;
+  backgroundColor?: keyof Theme["colors"];
+  size?: Size;
+  rounded?: boolean;
 }
 
 //default color white,it comes from variant in theme
-const Button = ({
+//should be added icon in future
+const Button = React.memo(({
+  children,
   onPress,
-  label,
   color,
   backgroundColor,
-  padding,
-  borderRadius,
-  width,
+  size,
+  rounded,
   ...props
 }: ButtonProps) => {
+  const { width: wWidth } = useDimensions().window;
+
   const theme = useTheme();
 
+  const bgColor = theme.colors[backgroundColor];
+
+  const width =
+    size === "small"
+      ? wWidth / 4.5
+      : size === "medium"
+      ? wWidth / 3
+      : wWidth / 2;
+
+  const borderRadius = rounded ? theme.borderRadii.xl : theme.borderRadii.none;
+
   return (
-    <RectButton onPress={onPress}>
-      <Box
-        style={[styles.container, { ...props }]}
-        {...{ padding, borderRadius, backgroundColor,width }}
-      >
-        <Text variant="button" {...{ color }}>
-          {label}
-        </Text>
-      </Box>
-    </RectButton>
+    <TouchableOpacity
+      style={[
+        styles.container,
+        {
+          borderRadius,
+          padding: theme.borderRadii.l,
+          backgroundColor: bgColor,
+          width,
+          ...props,
+        },
+      ]}
+      onPress={onPress}
+    >
+      <Text variant="button" {...{ color }}>
+        {children}
+      </Text>
+    </TouchableOpacity>
   );
-};
+})
 
-Button.defaultProps = {
-  label:"Next",
-  
-  backgroundColor:"mainBackground",
-  padding: { phone: "s", tablet: "m" },
-  borderRadius: "l",
-  width: 200,
-};
 
-export default Button
+export default Button;
