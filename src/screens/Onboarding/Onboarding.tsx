@@ -1,4 +1,5 @@
 import { useDimensions } from "@react-native-community/hooks";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { Button, Dot } from "../../components";
@@ -7,10 +8,8 @@ import { Box } from "../../utils";
 import { Slider, SliderImage, SliderText, SliderTitle } from "./Slider";
 import { SubSlider, SubSliderItem } from "./SubSlider";
 
-
-
-
 const Onboarding = () => {
+  const navigation = useNavigation();
   const { width } = useDimensions().window;
   const [completed, setCompleted] = useState(false);
   const scroll = useRef(null);
@@ -91,7 +90,19 @@ const Onboarding = () => {
         </SubSliderItem>
         <SubSliderItem>
           <Button
-            onPress={() => onPress((x as any)._value / width)}
+            onPress={() => {
+              if (completed) {
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: "Authentication" }],
+                  })
+                );
+             
+              } else {
+                onPress((x as any)._value / width);
+              }
+            }}
             backgroundColor="onboardingButtonColor"
             rounded
             size="medium"

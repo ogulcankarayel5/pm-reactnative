@@ -2,9 +2,11 @@ export type AppRoutes = {
 
     Authentication:undefined;
     Home:undefined;
+    Onboarding:undefined;
 }
 
 export type AuthenticationRoutes = {
 
-    Onboarding:undefined;
+    
+    Login:undefined;
 }
