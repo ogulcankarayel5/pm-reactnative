@@ -4,26 +4,27 @@ import { useEffect, useState } from "react";
 export const useIsFirstLaunch = () => {
   const [isFirst, setIsFirst] = useState(null);
 
-  
+  const changeValue = (value) => {
+    setIsFirst(value)
+  }
+
   useEffect(() => {
     const checkStorage = async () => {
-      try {
-        const item = await AsyncStorage.getItem("firstLaunchCheck39");
-       
-        if (item === null) {
-          await AsyncStorage.setItem("firstLaunchCheck39", JSON.stringify(true));
-          console.log("first:",true)
+      try{
+        const value = await AsyncStorage.getItem("first25");
+        if(value===null){
           setIsFirst(true);
-        } else {
-          console.log("first:",false)
+        }
+        else{
           setIsFirst(false);
         }
-      } catch (err) {
-        console.log(err);
+      }
+      catch(err){
+        console.log(err)
       }
     };
     checkStorage();
-  }, []);
+  }, [isFirst]);
 
-  return { isFirst };
+  return { isFirst,changeValue };
 };

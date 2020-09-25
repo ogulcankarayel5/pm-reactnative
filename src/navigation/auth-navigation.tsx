@@ -8,6 +8,7 @@ const AuthenticationStack = createStackNavigator<AuthenticationRoutes>();
 export const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator headerMode="none">
+      
       <AuthenticationStack.Screen name="Login" component={Login} />
     </AuthenticationStack.Navigator>
   );
