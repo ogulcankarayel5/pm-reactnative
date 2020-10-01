@@ -45,6 +45,8 @@ const Onboarding = React.memo(({ onDone }: OnboardingProps) => {
 
 export default Onboarding;
 
+
+
 const renderScroll = (scroll:React.MutableRefObject<ScrollView>, width:number, x:Animated.Value) => {
   return (
     <Animated.ScrollView
@@ -90,7 +92,7 @@ const renderScroll = (scroll:React.MutableRefObject<ScrollView>, width:number, x
 
 const renderSubSlider = (x:Animated.Value, width:number, completed:boolean, onDone:() => void, onPress:(index:number) => void) => {
   return (
-    <SubSlider>
+    <SubSlider >
       <SubSliderItem>
         {slides.map((_, index) => {
           return (

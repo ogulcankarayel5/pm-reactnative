@@ -1,8 +1,8 @@
-import { BackgroundColorProps, BorderProps, LayoutProps, OpacityProps, PositionProps, ShadowProps, SpacingProps, VisibleProps } from "@shopify/restyle";
 import React from "react";
-import { Box, Theme } from "../../utils";
+import { BaseProps } from "../../../types";
+import { Box } from "../../utils";
 
-type BaseProps = BackgroundColorProps<Theme> & OpacityProps<Theme> & VisibleProps<Theme> & LayoutProps<Theme> & SpacingProps<Theme> & BorderProps<Theme> & ShadowProps<Theme> & PositionProps<Theme>;
+
 
 type Props  = BaseProps & {children:React.ReactNode}
 

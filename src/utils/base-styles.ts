@@ -1,7 +1,5 @@
-import { Platform,StyleSheet, ViewStyle, ImageStyle, TextStyle, FlexStyle} from "react-native";
-import { makeStyles, Theme } from "./Theme";
-import { NamedStyles } from "../types";
-
+import Constants from "expo-constants";
+import { FlexStyle, ImageStyle, Platform, TextStyle, ViewStyle } from "react-native";
 //to choose ios or android style
 
 // const create = (styles: any): {[name: string]: number} => {
@@ -27,7 +25,10 @@ export const baseStyles : {[name: string]: ViewStyle | TextStyle | ImageStyle|Fl
   center:{
     justifyContent:"center",
     alignItems:"center",
-  } 
+  },
+  padding:{
+    paddingTop:Platform.OS==="android" ? Constants.statusBarHeight : 0
+  }
       
 } 
 

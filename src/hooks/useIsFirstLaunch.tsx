@@ -11,7 +11,7 @@ export const useIsFirstLaunch = () => {
   useEffect(() => {
     const checkStorage = async () => {
       try{
-        const value = await AsyncStorage.getItem("first25");
+        const value = await AsyncStorage.getItem("first27");
         if(value===null){
           setIsFirst(true);
         }

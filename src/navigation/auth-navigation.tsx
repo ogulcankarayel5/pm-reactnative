@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Login } from "../screens/Login";
+import { Login } from "../screens";
 import { AuthenticationRoutes } from "../types/navigation-type";
 
 const AuthenticationStack = createStackNavigator<AuthenticationRoutes>();

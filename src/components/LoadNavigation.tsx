@@ -16,7 +16,7 @@ const LoadNavigation = () => {
 
   const onDone = useCallback(async () => {
     try {
-      await AsyncStorage.setItem("first25", JSON.stringify(true));
+      await AsyncStorage.setItem("first27", JSON.stringify(true));
       changeValue(false);
     } catch (err) {
       console.log(err);

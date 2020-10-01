@@ -4,7 +4,7 @@ import { Asset } from "expo-asset";
 import Constants from "expo-constants";
 import * as Font from "expo-font";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, StatusBar } from "react-native";
 const NAVIGATION_STATE_KEY = `NAVIGATION_STATE_KEY-${Constants.manifest.sdkVersion}`;
 
 export type FontSource = Parameters<typeof Font.loadAsync>[0];
@@ -64,7 +64,7 @@ const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   }
   return (
     <NavigationContainer {...{ onStateChange, initialState }}>
-        
+      <StatusBar translucent />
       {children}
     </NavigationContainer>
   );
