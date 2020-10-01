@@ -40,13 +40,14 @@ const Button = React.memo(({
   const theme = useTheme();
 
   const bgColor = theme.colors[backgroundColor];
-
-  const width =
+  
+  //if size didn't come from props it will be null
+  const width = size &&
     size === "small"
       ? wWidth / 4.5
       : size === "medium"
       ? wWidth / 3
-      : wWidth / 2;
+      : size==="large" ? wWidth / 2:null;
 
   const borderRadius = rounded ? theme.borderRadii.xl : theme.borderRadii.none;
 
@@ -56,7 +57,7 @@ const Button = React.memo(({
         styles.container,
         {
           borderRadius,
-          padding: theme.borderRadii.l,
+          padding: theme.borderRadii.m,
           backgroundColor: bgColor,
           width,
           ...props,
