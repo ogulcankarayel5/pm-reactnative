@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "Subslide"
-    ]
+    ],
+    "files.exclude": {
+        "node_modules": true
+    }
 }

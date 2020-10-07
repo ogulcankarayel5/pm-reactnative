@@ -1,10 +1,13 @@
 import { useDimensions } from "@react-native-community/hooks";
 import React from "react";
 import {
+  ImageStyle,
   StyleSheet,
-  TouchableOpacity,
-  TouchableOpacityProps
+  TextStyle,
+  TouchableOpacityProps,
+  ViewStyle
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { baseStyles, Text, Theme, useTheme } from "../utils";
 
 const styles = StyleSheet.create({
@@ -14,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 type Size = "small" | "medium" | "large";
-
+type Style = ViewStyle | ImageStyle | TextStyle;
 interface ButtonProps extends TouchableOpacityProps {
   onPress: () => void;
   children: string;
@@ -22,55 +25,64 @@ interface ButtonProps extends TouchableOpacityProps {
   backgroundColor?: keyof Theme["colors"];
   size?: Size;
   rounded?: boolean;
+  style?: Style;
 }
 
 //default color white,it comes from variant in theme
 //should be added icon in future
-const Button = React.memo(({
-  children,
-  onPress,
-  color,
-  backgroundColor,
-  size,
-  rounded,
-  ...props
-}: ButtonProps) => {
-  const { width: wWidth } = useDimensions().window;
+const Button = React.memo(
+  ({
+    children,
+    onPress,
+    color,
+    backgroundColor,
+    size,
+    rounded,
+    style,
+    ...props
+  }: ButtonProps) => {
+    const { width: wWidth } = useDimensions().window;
 
-  const theme = useTheme();
+    const theme = useTheme();
 
-  const bgColor = theme.colors[backgroundColor];
-  
-  //if size didn't come from props it will be null
-  const width = size &&
-    size === "small"
-      ? wWidth / 4.5
-      : size === "medium"
-      ? wWidth / 3
-      : size==="large" ? wWidth / 2:null;
+    const bgColor = theme.colors[backgroundColor];
 
-  const borderRadius = rounded ? theme.borderRadii.xl : theme.borderRadii.none;
+    //if size didn't come from props it will be null
+    const width =
+      size && size === "small"
+        ? wWidth / 4.5
+        : size === "medium"
+        ? wWidth / 3
+        : size === "large"
+        ? wWidth / 2
+        : null;
 
-  return (
-    <TouchableOpacity
-      style={[
-        styles.container,
-        {
-          borderRadius,
-          padding: theme.borderRadii.m,
-          backgroundColor: bgColor,
-          width,
-          ...props,
-        },
-      ]}
-      onPress={onPress}
-    >
-      <Text variant="button" {...{ color }}>
-        {children}
-      </Text>
-    </TouchableOpacity>
-  );
-})
+    const borderRadius = rounded
+      ? theme.borderRadii.xl
+      : theme.borderRadii.none;
 
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={onPress}
+        {...props}
+        style={[
+          styles.container,
+          {
+            borderRadius,
+            padding: theme.borderRadii.m,
+            backgroundColor: bgColor,
+            width,
+          },
+          { ...style },
+        ]}
+      >
+        <Text variant="button" {...{ color }}>
+          {children}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+);
 
 export default Button;
