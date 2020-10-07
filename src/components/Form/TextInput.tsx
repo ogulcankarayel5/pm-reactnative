@@ -1,17 +1,21 @@
 import { Feather as Icon } from "@expo/vector-icons";
-import React from "react";
+import React, { forwardRef, ReactNode } from "react";
 import {
   TextInput as RNInput,
   TextInputProps as RNTextInputProps
 } from "react-native";
+import { BaseProps } from "../../../types";
 import { widthPercentageToDP } from "../../hooks/useOrientation";
-import { Box } from "../../utils";
+import { Box, useTheme } from "../../utils";
+import RoundedIcon from "../RoundedIcon";
+import Error from "./Error";
 
-interface TextInputProps extends RNTextInputProps {
-  icon?: string;
-}
+type TextInputContainerProps = BaseProps & { children: ReactNode };
 
-const TextInput = ({ icon, ...props }: TextInputProps) => {
+export const TextInputContainer = ({
+  children,
+  ...props
+}: TextInputContainerProps) => {
   return (
     <Box
       mt="m"
@@ -21,19 +25,53 @@ const TextInput = ({ icon, ...props }: TextInputProps) => {
       backgroundColor="primaryInput"
       borderRadius="xl"
       padding="s"
+      {...props}
     >
-      <Box padding="s">
-        <Icon name={icon} size={widthPercentageToDP("4%")} color="#6A6A6A" />
-      </Box>
-      <Box flex={1}>
-        <RNInput
-          style={{ fontSize: widthPercentageToDP("4%") }}
-          underlineColorAndroid="transparent"
-          {...props}
-        />
-      </Box>
+      {children}
     </Box>
   );
 };
 
-export default TextInput;
+interface TextInputProps extends RNTextInputProps {
+  icon?: string;
+  touched?: boolean;
+  error?: string;
+}
+
+export const TextInput = forwardRef<RNInput, TextInputProps>(
+  ({ icon, touched, error, ...props }: TextInputProps, ref) => {
+    const theme = useTheme();
+
+    return (
+      <>
+        <Box padding="s">
+          <Icon
+            name={icon}
+            size={widthPercentageToDP("4%")}
+            color={theme.colors.primaryFormIcon}
+          />
+        </Box>
+        <Box flex={1}>
+          <RNInput
+            {...{ ref }}
+            style={{ fontSize: widthPercentageToDP("4%") }}
+            underlineColorAndroid="transparent"
+            placeholderTextColor={theme.colors.primaryPlaceholder}
+            {...props}
+          />
+        </Box>
+
+        {touched && (
+          <Error error={error ? true : false}>
+            <RoundedIcon
+              size={widthPercentageToDP("4%")}
+              name={error ? "x" : "check"}
+              color="white"
+              backgroundColor={error ? "danger" : "primary"}
+            />
+          </Error>
+        )}
+      </>
+    );
+  }
+);

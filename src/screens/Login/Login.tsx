@@ -1,4 +1,6 @@
-import React from "react";
+import { useFormik } from "formik";
+import React, { useRef } from "react";
+import { TextInput as RNTextInput } from "react-native";
 import {
   Footer,
   FooterAction,
@@ -6,22 +8,51 @@ import {
   FormContainer,
   SocialIconButton,
   SocialIcons,
-  TextInput
+  TextInput,
+  TextInputContainer
 } from "../../components";
 import Button from "../../components/Button";
 import { Facebook, Github, İcons8Google } from "../../components/icons";
-import { Box, Text } from "../../utils";
+import { Form } from "../../constants";
+import { Box, Schemas, Text } from "../../utils";
 import { useTheme } from "./../../utils/Theme";
 
-interface LoginProps {}
+interface IFormValues {
+  email: string;
+  password: string;
+}
 
+const formValues: IFormValues = {
+  email: "",
+  password: "",
+};
 export const Login = ({}) => {
+  const {
+    setFieldTouched,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    values,
+    getFieldMeta,
+    isValid,
+    setFieldValue,
+    dirty,
+  } = useFormik({
+    validationSchema: Schemas.LoginSchema,
+    initialValues: formValues,
+    onSubmit: (values: IFormValues) => console.log(values),
+  });
+
   const theme = useTheme();
+  const valid = isValid && dirty;
+  const password = useRef<RNTextInput>(null);
 
   const footer = (
     <Footer>
       <Box flex={1}>
-        <FooterText>or sign in with</FooterText>
+        <FooterText>{Form.loginFooterText}</FooterText>
         <SocialIcons>
           <SocialIconButton onPress={() => true}>
             <İcons8Google />
@@ -45,25 +76,62 @@ export const Login = ({}) => {
     </Footer>
   );
 
+  const onSubmit = (values: IFormValues) => console.log(values);
   return (
-    <FormContainer title="Login to your Account" {...{ footer }}>
-      <TextInput
-        placeholder="Enter email"
-        icon="mail"
-        placeholderTextColor={theme.colors.primaryPlaceholder}
-      />
-      <TextInput />
+    <FormContainer title={Form.loginFormTitle} {...{ footer }}>
+      <TextInputContainer>
+        <TextInput
+          placeholder={Form.emailPlaceHolder}
+          icon="mail"
+          onChangeText={(e) => {
+            setFieldValue("email", e);
+            setTimeout(() => setFieldTouched("email", true));
+          }}
+          autoCapitalize="none"
+          autoCompleteType="email"
+          keyboardType="email-address"
+          returnKeyLabel="next"
+          returnKeyType="next"
+          onSubmitEditing={() => password.current?.focus()}
+          blurOnSubmit={false}
+          touched={touched.email}
+          error={errors.email}
+          onBlur={handleBlur("email")}
+        />
+      </TextInputContainer>
+
+      <TextInputContainer>
+        <TextInput
+          ref={password}
+          placeholder={Form.passwordPlaceHolder}
+          icon="lock"
+          onChangeText={(e) => {
+            setFieldValue("password", e);
+            setTimeout(() => setFieldTouched("password", true));
+          }}
+          autoCapitalize="none"
+          autoCompleteType="password"
+          returnKeyLabel="go"
+          returnKeyType="go"
+          secureTextEntry
+          onSubmitEditing={() => handleSubmit()}
+          touched={touched.password}
+          error={errors.password}
+          onBlur={handleBlur("password")}
+        />
+      </TextInputContainer>
       <Box mt="m">
         <Button
-          backgroundColor="formButtonColor"
+          onPress={handleSubmit}
+          disabled={valid ? false : true}
+          backgroundColor={valid ? "formButtonColor" : "disabledButtonColor"}
           rounded
-          style={{ width: "100%" }}
         >
-          Sign in
+          {Form.loginButtonText}
         </Button>
       </Box>
       <Text mt="m" variant="authText" color="authAction">
-        Forgot Password
+        {Form.forgotPassword}
       </Text>
     </FormContainer>
   );
