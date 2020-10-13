@@ -1,1 +1,3 @@
-export {NamedStyles} from "./style-type";
+export * from "./service-type";
+export { NamedStyles } from "./style-type";
+

@@ -10,18 +10,21 @@ import { NamedStyles } from "../types";
 
 const palette = {
   white: "#FFF",
-  white2:"#EDF0F7",
+  white2: "#EDF0F7",
   black: "#111",
   lightBlue: "#346E93",
-
+  red: "#FF0000",
   gray: "#6A6A6A",
   lightGray: "#A7A9AD",
   navyBlue: "#4E5DB2",
   darkBlue: "#263671",
+  lightGreen: "#32CD32",
 };
 
 const theme = {
   colors: {
+    danger: palette.red,
+    primary: palette.lightGreen,
     //1E319D button sign in
     white: palette.white,
     mainBackground: palette.white,
@@ -31,6 +34,9 @@ const theme = {
     onboardingButtonTextColor: palette.white,
     primaryTitle: "#0A2648",
     primaryText: "#688AA3",
+
+    disabledButtonColor: "#deded7",
+    primaryFormIcon: palette.gray,
     formText: palette.gray,
     formButtonColor: palette.darkBlue,
 
@@ -40,9 +46,9 @@ const theme = {
     primaryAuthText: palette.lightGray,
     authAction: palette.darkBlue,
 
-    primaryPlaceholder:palette.gray,
+    primaryPlaceholder: palette.gray,
 
-    primaryInput:palette.white2
+    primaryInput: palette.white2,
   },
   spacing: {
     none: 0,

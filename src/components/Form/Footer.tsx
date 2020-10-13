@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { BorderlessButton } from "react-native-gesture-handler";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { BaseProps, BaseTextProps } from "../../../types";
 import { Box, Text } from "../../utils";
 
@@ -34,13 +34,13 @@ type FooterActionProps = {
 
 export const FooterAction = ({ onPress, title, action }: FooterActionProps) => {
   return (
-    <BorderlessButton {...{ onPress }}>
+    <TouchableWithoutFeedback {...{ onPress }}>
       <Text variant="authText">
         {title}
         <Text ml="xl" color="authAction">
           {action}
         </Text>
       </Text>
-    </BorderlessButton>
+    </TouchableWithoutFeedback>
   );
 };
