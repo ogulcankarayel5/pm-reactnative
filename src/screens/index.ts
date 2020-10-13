@@ -1,3 +1,4 @@
-export * from "./Login";
-export * from "./Onboarding";
+export { Login } from "./Login";
+export { Onboarding } from "./Onboarding";
+export { SignUp } from "./SignUp";
 

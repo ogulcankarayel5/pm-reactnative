@@ -1,41 +1,45 @@
+import { androidClientId } from "@env";
+import * as Google from "expo-google-app-auth";
 import { useFormik } from "formik";
 import React, { useRef } from "react";
 import { TextInput as RNTextInput } from "react-native";
+import { useDispatch } from "react-redux";
+import { IFormValues } from "../../../types";
 import {
+  Button,
+  Facebook,
   Footer,
   FooterAction,
   FooterText,
   FormContainer,
+  Github,
   SocialIconButton,
   SocialIcons,
   TextInput,
-  TextInputContainer
+  TextInputContainer,
+  İcons8Google
 } from "../../components";
-import Button from "../../components/Button";
-import { Facebook, Github, İcons8Google } from "../../components/icons";
 import { Form } from "../../constants";
+import { loginWithGoogle } from "../../redux/auth/actions";
 import { Box, Schemas, Text } from "../../utils";
+import { AuthNavigationProps } from "./../../types/navigation-type";
 import { useTheme } from "./../../utils/Theme";
 
-interface IFormValues {
-  email: string;
-  password: string;
-}
+
 
 const formValues: IFormValues = {
   email: "",
   password: "",
 };
-export const Login = ({}) => {
+const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
+
+  const dispatch = useDispatch();
   const {
     setFieldTouched,
-    handleSubmit,
-    handleChange,
+    handleSubmit, 
     handleBlur,
     errors,
     touched,
-    values,
-    getFieldMeta,
     isValid,
     setFieldValue,
     dirty,
@@ -49,12 +53,28 @@ export const Login = ({}) => {
   const valid = isValid && dirty;
   const password = useRef<RNTextInput>(null);
 
+
+  const signInWithGoogleAsync = async () => {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId:androidClientId,
+      });
+
+      if (result.type === "success") {
+        dispatch(loginWithGoogle(result.accessToken && result.accessToken))
+      }
+    } catch ({message}) {
+      return message
+    }
+  };
+
+
   const footer = (
     <Footer>
       <Box flex={1}>
         <FooterText>{Form.loginFooterText}</FooterText>
         <SocialIcons>
-          <SocialIconButton onPress={() => true}>
+          <SocialIconButton onPress={signInWithGoogleAsync}>
             <İcons8Google />
           </SocialIconButton>
           <SocialIconButton onPress={() => true}>
@@ -68,7 +88,7 @@ export const Login = ({}) => {
 
       <Box justifyContent="center" flex={0.3} mt="m">
         <FooterAction
-          onPress={() => true}
+          onPress={() => navigation.navigate("SignUp")}
           title="Don't you have an account ?"
           action="Sign Up"
         />
@@ -76,15 +96,15 @@ export const Login = ({}) => {
     </Footer>
   );
 
-  const onSubmit = (values: IFormValues) => console.log(values);
+ 
   return (
     <FormContainer title={Form.loginFormTitle} {...{ footer }}>
       <TextInputContainer>
         <TextInput
           placeholder={Form.emailPlaceHolder}
           icon="mail"
-          onChangeText={(e) => {
-            setFieldValue("email", e);
+          onChangeText={(email) => {
+            setFieldValue("email", email);
             setTimeout(() => setFieldTouched("email", true));
           }}
           autoCapitalize="none"
@@ -105,8 +125,8 @@ export const Login = ({}) => {
           ref={password}
           placeholder={Form.passwordPlaceHolder}
           icon="lock"
-          onChangeText={(e) => {
-            setFieldValue("password", e);
+          onChangeText={(password) => {
+            setFieldValue("password", password);
             setTimeout(() => setFieldTouched("password", true));
           }}
           autoCapitalize="none"
