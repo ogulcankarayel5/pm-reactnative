@@ -22,7 +22,7 @@ const LoadNavigation = () => {
 
   const onDone = useCallback(async () => {
     try {
-      await AsyncStorage.setItem("first29", JSON.stringify(true));
+      await AsyncStorage.setItem("first81", JSON.stringify(true));
       changeValue(false);
     } catch (err) {
       console.log(err);
@@ -33,9 +33,11 @@ const LoadNavigation = () => {
     return <AppLoading />;
   }
 
-  return isFirst ? (
-    <Onboarding onDone={onDone} />
-  ) : loading ? (
+  if(isFirst) {
+    return <Onboarding onDone={onDone}/>
+  }
+
+  return loading ? (
     <Loading />
   ) : (
     <AppStack.Navigator headerMode="none">

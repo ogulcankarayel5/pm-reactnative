@@ -20,7 +20,7 @@ export interface IResponse {
   access_token:string
   data:User
   refresh_token:string
-  success:true
+  success:boolean
 }
 
 

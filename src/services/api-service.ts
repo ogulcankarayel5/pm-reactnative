@@ -32,7 +32,8 @@ const callAxios = async <T=any>(parameters: IAxiosParameters): Promise<T> => {
         resolve(response.data as T);
       })
       .catch((error) => {
-        console.log("response in callaxios: ",error.response);
+        
+        // console.log("response in callaxios error: ",error.response);
         reject(error.response);
       });
   });

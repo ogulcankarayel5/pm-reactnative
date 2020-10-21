@@ -1,3 +1,4 @@
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
 import { AuthActionTypes, AuthState } from "./types";
 
 export const initialState: AuthState = {
@@ -14,12 +15,12 @@ export function authReducer(
   action: AuthActionTypes
 ): AuthState {
   switch (action.type) {
-    case "@auth/LOGIN_REQUEST":
+    case LOGIN_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case "@auth/LOGIN_SUCCESS":
+    case LOGIN_SUCCESS:
       const { data, access_token, refresh_token, success } = action.payload;
       return {
         ...state,
@@ -29,6 +30,17 @@ export function authReducer(
         refresh_token,
         success,
       };
+    case LOGIN_FAILURE : 
+      return {
+        ...state,
+        loading:false,
+        user:null,
+        access_token:null,
+        refresh_token:null,
+        success:false
+      }
+
+    
     default:
       return state;
   }

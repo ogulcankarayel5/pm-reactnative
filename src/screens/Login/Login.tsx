@@ -1,10 +1,7 @@
-import { androidClientId } from "@env";
-import * as Google from "expo-google-app-auth";
 import { useFormik } from "formik";
 import React, { useRef } from "react";
 import { TextInput as RNTextInput } from "react-native";
 import { useDispatch } from "react-redux";
-import { IFormValues } from "../../../types";
 import {
   Button,
   Facebook,
@@ -20,14 +17,15 @@ import {
   İcons8Google
 } from "../../components";
 import { Form } from "../../constants";
-import { loginWithGoogle } from "../../redux/auth/actions";
+import { FormUser } from "../../redux";
+import { loginWithCredentials, loginWithGoogle } from "../../redux/auth/actions";
 import { Box, Schemas, Text } from "../../utils";
 import { AuthNavigationProps } from "./../../types/navigation-type";
 import { useTheme } from "./../../utils/Theme";
 
 
 
-const formValues: IFormValues = {
+const formValues: FormUser = {
   email: "",
   password: "",
 };
@@ -46,7 +44,11 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
   } = useFormik({
     validationSchema: Schemas.LoginSchema,
     initialValues: formValues,
-    onSubmit: (values: IFormValues) => console.log(values),
+    onSubmit: (values: FormUser) =>{
+       console.log(values)
+       dispatch(loginWithCredentials(values))
+
+      },
   });
 
   const theme = useTheme();
@@ -55,18 +57,9 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
 
 
   const signInWithGoogleAsync = async () => {
-    try {
-      const result = await Google.logInAsync({
-        androidClientId:androidClientId,
-      });
-
-      if (result.type === "success") {
-        dispatch(loginWithGoogle(result.accessToken && result.accessToken))
-      }
-    } catch ({message}) {
-      return message
-    }
+    dispatch(loginWithGoogle())
   };
+
 
 
   const footer = (

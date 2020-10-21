@@ -1,12 +1,21 @@
 import { IResponse } from "../../types";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
 
 
 //models
-export interface User {
+export interface UserBase {
     name?:string
     email?:string
-    _id?:string,
+   
+}
+
+export interface User extends UserBase{
+    _id?:string
     googleId?:string
+}
+
+export interface FormUser extends UserBase {
+    password?:string
 }
 
 
@@ -21,18 +30,18 @@ export interface AuthState {
 
 //types
 export interface LoginRequestAction{
-    type:"@auth/LOGIN_REQUEST",
+    type:typeof LOGIN_REQUEST,
 }
 
 
 export interface LoginSuccessAction {
-    type:"@auth/LOGIN_SUCCESS",
+    type:typeof LOGIN_SUCCESS,
     
     payload:IResponse
 }
 
 export interface LoginFailureAction {
-    type:"@auth/LOGIN_ERROR"
+    type:typeof LOGIN_FAILURE
 }
 
 
