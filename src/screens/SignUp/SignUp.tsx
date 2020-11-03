@@ -15,7 +15,7 @@ import {
 import Button from "../../components/Button";
 import { Facebook, Github, İcons8Google } from "../../components/icons";
 import { Form } from "../../constants";
-import { Box, Schemas, Text } from "../../utils";
+import { Box, Schemas } from "../../utils";
 import { AuthNavigationProps } from "./../../types/navigation-type";
 import { useTheme } from "./../../utils/Theme";
 
@@ -150,9 +150,7 @@ const SignUp = ({ navigation }: AuthNavigationProps<"SignUp">) => {
           {Form.loginButtonText}
         </Button>
       </Box>
-      <Text mt="m" variant="authText" color="authAction">
-        {Form.forgotPassword}
-      </Text>
+    
     </FormContainer>
   );
 };

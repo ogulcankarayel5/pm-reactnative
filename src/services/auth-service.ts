@@ -1,5 +1,5 @@
 import { FormUser } from "../redux";
-import { IResponse } from "../types";
+import { IBaseResponse, IResponse } from "../types";
 import { post } from "./api-service";
 
 
@@ -18,7 +18,14 @@ export const loginWithGoogle = async(accessToken:string) : Promise<IResponse> =>
     return response
 }
 
+export const forgotPassword = async (email:string):Promise<IBaseResponse> => {
+    const response = await post<IBaseResponse>({endpoint:"/auth/forgotpassword",params:null,data:{email:email}})
+    console.log(response)
+    return response
+}
+
 export default {
     loginWithGoogle,
-    loginWithCredentials
+    loginWithCredentials,
+    forgotPassword
 }

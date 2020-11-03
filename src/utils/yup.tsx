@@ -14,8 +14,13 @@ const SignUpSchema=yup.object().shape({
   password:yup.string().required().min(3)
 })
 
+const ForgotPasswordSchema = yup.object().shape({
+  email:yup.string().required().email()
+})
+
 
 export default  {
     LoginSchema,
-    SignUpSchema
+    SignUpSchema,
+    ForgotPasswordSchema
 }

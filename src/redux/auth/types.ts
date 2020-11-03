@@ -1,5 +1,5 @@
-import { IResponse } from "../../types";
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
+import { IBaseResponse, IResponse } from "../../types";
+import { FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
 
 
 //models
@@ -45,4 +45,11 @@ export interface LoginFailureAction {
 }
 
 
-export type AuthActionTypes= LoginSuccessAction | LoginRequestAction |  LoginFailureAction;
+
+export interface ForgotPasswordSuccessAction {
+    type:typeof FORGOT_PASSWORD_SUCCESS,
+    payload:IBaseResponse
+}
+
+
+export type AuthActionTypes= LoginSuccessAction | LoginRequestAction |  LoginFailureAction | ForgotPasswordSuccessAction;

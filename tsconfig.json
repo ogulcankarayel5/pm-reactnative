@@ -8,6 +8,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
-  }
+    "strict": true,
+    "typeRoots": ["./types"],
+  },
+  
 }

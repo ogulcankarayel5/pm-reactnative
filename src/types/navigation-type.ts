@@ -9,6 +9,7 @@ export type AppRoutes = {
 export type AuthenticationRoutes = {
   Login: undefined;
   SignUp:undefined;
+  ForgotPassword:undefined;
 };
 
 export interface AuthNavigationProps<

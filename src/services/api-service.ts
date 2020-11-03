@@ -28,7 +28,7 @@ const callAxios = async <T=any>(parameters: IAxiosParameters): Promise<T> => {
 
     axiosInstance(config)
       .then((response: AxiosResponse<T>) => {
-        console.log("response in callAxios: ", response);
+        // console.log("response in callAxios: ", response);
         resolve(response.data as T);
       })
       .catch((error) => {

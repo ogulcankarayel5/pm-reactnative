@@ -19,7 +19,7 @@ import {
 import { Form } from "../../constants";
 import { FormUser } from "../../redux";
 import { loginWithCredentials, loginWithGoogle } from "../../redux/auth/actions";
-import { Box, Schemas, Text } from "../../utils";
+import { Box, Schemas } from "../../utils";
 import { AuthNavigationProps } from "./../../types/navigation-type";
 import { useTheme } from "./../../utils/Theme";
 
@@ -143,9 +143,10 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
           {Form.loginButtonText}
         </Button>
       </Box>
-      <Text mt="m" variant="authText" color="authAction">
-        {Form.forgotPassword}
-      </Text>
+     
+      <Button onPress={() => navigation.navigate("ForgotPassword")} backgroundColor="white" color="authAction">
+          {Form.forgotPassword}
+      </Button>
     </FormContainer>
   );
 };

@@ -7,7 +7,7 @@ import SafeAreaView from "../SafeAreaView";
 type FormContainerProps = {
   title: string;
   children: ReactNode;
-  footer: ReactNode;
+  footer?: ReactNode;
 };
 
 const FormContainer = ({ title, children, footer }: FormContainerProps) => {
@@ -23,12 +23,12 @@ const FormContainer = ({ title, children, footer }: FormContainerProps) => {
             />
           </Box>
 
-          <Box flex={1} paddingHorizontal="l">
-            <Box flex={1} justifyContent="center">
+          <Box flex={1} paddingHorizontal="l" >
+            <Box flex={0.5} justifyContent="center">
               <Text variant="formTitle">{title}</Text>
               {children}
             </Box>
-            {footer}
+            {footer && footer}
           </Box>
         </Box>
       </KeyboardAwareScrollView>

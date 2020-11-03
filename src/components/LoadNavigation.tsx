@@ -1,3 +1,4 @@
+import { ONBOARDING_KEY } from "@env";
 import AsyncStorage from "@react-native-community/async-storage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
@@ -22,7 +23,7 @@ const LoadNavigation = () => {
 
   const onDone = useCallback(async () => {
     try {
-      await AsyncStorage.setItem("first81", JSON.stringify(true));
+      await AsyncStorage.setItem(ONBOARDING_KEY, JSON.stringify(true));
       changeValue(false);
     } catch (err) {
       console.log(err);

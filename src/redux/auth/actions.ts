@@ -1,10 +1,14 @@
-import { androidClientId } from "@env";
+
+
+import { androidClientId } from '@env';
 import * as Google from "expo-google-app-auth";
 import { Dispatch } from "redux";
 import { authService, storageService } from "../../services";
-import { IResponse } from "../../types";
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./constants";
+import { IBaseResponse, IResponse } from "../../types";
+import { FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./constants";
 import { AuthActionTypes, FormUser } from "./types";
+
+
 
 export const loginRequest = (): AuthActionTypes => {
   return {
@@ -24,6 +28,13 @@ export const loginFailure = (): AuthActionTypes => {
     type: LOGIN_FAILURE,
   };
 };
+
+export const forgotPasswordSuccess = (data:IBaseResponse) : AuthActionTypes => {
+  return{
+    type:FORGOT_PASSWORD_SUCCESS,
+    payload:data
+  }
+}
 
 
 
@@ -66,3 +77,18 @@ export const loginWithGoogle = () => async (
     dispatch(loginFailure());
   }
 };
+
+export const forgotPassword = (email:string) => async (
+  dispatch:Dispatch<AuthActionTypes>) => {
+    try{
+      dispatch(loginRequest())
+      const response = await authService.forgotPassword(email)
+      console.log("response in action ",response)
+      dispatch(forgotPasswordSuccess(response))
+      
+    }catch(err){
+      dispatch(loginFailure())
+      console.log("err: ",err)
+    }
+  }
+

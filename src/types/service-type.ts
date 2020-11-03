@@ -16,6 +16,12 @@ export interface IAxiosParameters extends IParameters {
 
 
 
+
+export interface IBaseResponse {
+  message:string,
+  success:boolean
+}
+
 export interface IResponse {
   access_token:string
   data:User
