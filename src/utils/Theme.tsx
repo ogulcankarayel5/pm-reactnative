@@ -19,6 +19,10 @@ const palette = {
   navyBlue: "#4E5DB2",
   darkBlue: "#263671",
   lightGreen: "#32CD32",
+  purple:"#9773FB",
+  lightDark:"#131313",
+  dark:"#000",
+
 };
 
 const theme = {
@@ -49,6 +53,14 @@ const theme = {
     primaryPlaceholder: palette.gray,
 
     primaryInput: palette.white2,
+
+    activeTabBarButton:palette.purple,
+    inactiveTabBarButton:palette.gray,
+
+    tabBarColor:palette.lightDark,
+    tabBarShadowColor:palette.dark,
+
+    primaryBackgroundColor:"#1A1A1A",
   },
   spacing: {
     none: 0,
@@ -103,6 +115,12 @@ const theme = {
       fontFamily: "Oswald",
       fontWeight: "bold",
     },
+    stackHeader:{
+      color:"white",
+      fontSize:widthPercentageToDP("4%"),
+      fontFamily: "Rouge",
+      fontWeight:"bold"
+    }
   },
   // cardVariants: {
   //   regular: {
