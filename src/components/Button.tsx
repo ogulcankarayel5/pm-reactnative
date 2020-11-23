@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 type Size = "small" | "medium" | "large";
-type Style = ViewStyle | ImageStyle | TextStyle;
+export type Style = ViewStyle | ImageStyle | TextStyle;
 interface ButtonProps extends TouchableOpacityProps {
   onPress: () => void;
   children: string;

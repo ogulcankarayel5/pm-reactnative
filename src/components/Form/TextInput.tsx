@@ -44,13 +44,13 @@ export const TextInput = forwardRef<RNInput, TextInputProps>(
 
     return (
       <>
-        <Box padding="s">
+       {icon && ( <Box padding="s">
           <Icon
             name={icon}
             size={widthPercentageToDP("4%")}
             color={theme.colors.primaryFormIcon}
           />
-        </Box>
+        </Box>)}
         <Box flex={1}>
           <RNInput
             {...{ ref }}

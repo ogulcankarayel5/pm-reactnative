@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Box, Text } from "../../utils";
-import SafeAreaView from "../SafeAreaView";
+import { SafeAreaView } from "../SafeAreaView";
 
 type FormContainerProps = {
   title: string;
