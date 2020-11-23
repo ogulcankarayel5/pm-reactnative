@@ -7,24 +7,31 @@ import { Box } from "../../utils";
 import { Slider, SliderImage, SliderText, SliderTitle } from "./Slider";
 import { SubSlider, SubSliderItem } from "./SubSlider";
 
+
 type OnboardingProps = {
   onDone: () => void;
 };
 
-const Onboarding = React.memo(({ onDone }: OnboardingProps) => {
+const Onboarding = ({ onDone }: OnboardingProps) => {
   const { width } = useDimensions().window;
   const [completed, setCompleted] = useState<boolean>(false);
   const scroll = useRef<ScrollView>(null);
-
+  
   const x = React.useRef<Animated.Value>(new Animated.Value(0)).current;
 
   const onPress = useCallback((index: number) => {
+    console.log("width: ",width)
+
+    console.log(Math.round(index+1))
+    console.log(Math.round((index+1)*width))
     scroll.current.scrollTo({ x: width * (index + 1), animated: true });
   }, []);
 
   React.useEffect(() => {
     x.addListener(({ value }) => {
-      if (Math.ceil(value / width) === slides.length - 1) {
+      
+      //this line should be fixed
+      if (Math.round(value / width) === slides.length - 1) {
         setCompleted(true);
       } else {
         setCompleted(false);
@@ -41,7 +48,7 @@ const Onboarding = React.memo(({ onDone }: OnboardingProps) => {
       {renderSubSlider(x, width, completed, onDone, onPress)}
     </Box>
   );
-});
+}
 
 export default Onboarding;
 
@@ -53,16 +60,17 @@ const renderScroll = (scroll:React.MutableRefObject<ScrollView>, width:number, x
       showsHorizontalScrollIndicator={false}
       ref={scroll}
       pagingEnabled
-      decelerationRate="normal"
+      decelerationRate={9}
       snapToAlignment="center"
       snapToInterval={width}
       scrollEventThrottle={16}
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { x } } }], {
         useNativeDriver: true,
       })}
+      
       horizontal
       bounces={false}
-      contentContainerStyle={{ flexGrow: 1 }}
+      contentContainerStyle={{ flexGrow: 1}}
     >
       {slides.map((data, index) => {
         const opacity = x.interpolate({
@@ -91,6 +99,8 @@ const renderScroll = (scroll:React.MutableRefObject<ScrollView>, width:number, x
 };
 
 const renderSubSlider = (x:Animated.Value, width:number, completed:boolean, onDone:() => void, onPress:(index:number) => void) => {
+  
+  
   return (
     <SubSlider >
       <SubSliderItem>
@@ -110,6 +120,7 @@ const renderSubSlider = (x:Animated.Value, width:number, completed:boolean, onDo
             if (completed) {
               onDone();
             } else {
+              //this line should be fixed
               onPress((x as any)._value / width);
             }
           }}

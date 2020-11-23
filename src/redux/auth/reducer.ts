@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
+import { FORGOT_PASSWORD_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from './constants';
 import { AuthActionTypes, AuthState } from "./types";
 
 export const initialState: AuthState = {
@@ -38,6 +38,12 @@ export function authReducer(
         access_token:null,
         refresh_token:null,
         success:false
+      }
+    case FORGOT_PASSWORD_SUCCESS:
+      return{
+        ...state,
+        loading:false,
+        success:true,
       }
 
     

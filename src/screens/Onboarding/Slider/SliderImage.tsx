@@ -8,7 +8,7 @@ interface SliderImageProps {
     src:string
 }
 
-export const SliderImage =React.memo( ({ src="https://res.cloudinary.com/ogulcankarayel-digital/image/upload/v1598991377/2942057-removebg-preview_1_1_no1tjb.png" }:SliderImageProps) => {
+export const SliderImage =({ src="https://res.cloudinary.com/ogulcankarayel-digital/image/upload/v1598991377/2942057-removebg-preview_1_1_no1tjb.png" }:SliderImageProps) => {
   const { width, height } = useDimensions().window;
   const aspect = height / width;
 
@@ -22,4 +22,4 @@ export const SliderImage =React.memo( ({ src="https://res.cloudinary.com/ogulcan
       }}
     />
   );
-})
+}

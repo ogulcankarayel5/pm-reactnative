@@ -37,8 +37,9 @@ const ForgotPassword = ({ navigation }: AuthNavigationProps<"ForgotPassword">) =
     initialValues: formValues,
     onSubmit: (values: FormUser) => {
       console.log(values);
-      //dispatch(loginWithCredentials(values))
+     
      dispatch(forgotPassword(values.email))
+     navigation.navigate("Login")
     },
   });
 
