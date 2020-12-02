@@ -1,5 +1,4 @@
 {
-  "include": ["node_modules/react-native-redash/lib/typescript/v1/index.d.ts"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
@@ -9,7 +8,21 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
+    "baseUrl": ".",
+    "allowJs": true,
+   
+    "paths": {
+      "assets/*":["./assets/*"],
+      "utils/*": ["./src/utils/*"],
+      "components/*": ["./src/components/*"],
+      "constants/*": ["./src/constants/*"],
+      "data/*": ["./src/data/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "store/*:": ["./src/store/*"],
+      "screens/*": ["./src/screens/*"],
+      "services/*": ["./src/services/*"],
+      "types/*": ["./src/types/*"]
+    },
     
-  },
-  
+  }
 }
