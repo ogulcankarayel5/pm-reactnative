@@ -1,14 +1,19 @@
-import React from "react";
-import FlashMessage from "react-native-flash-message";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
-import { LoadAssets } from "./src/components";
-import { fonts, onboarding1, onboarding2 } from "./src/constants";
-import { LoadNavigation } from "./src/navigation";
-import { store } from "./src/redux/store/index";
-import { ThemeProvider } from "./src/utils";
+import { LoadAssets } from 'components';
+import { fonts, onboarding1, onboarding2 } from 'constants';
+import { LoadNavigation } from 'navigation';
+import React from 'react';
+import { YellowBox } from 'react-native';
+import FlashMessage from 'react-native-flash-message';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { store } from 'store';
+import { ThemeProvider } from 'utils';
 
-const assets = [require("./assets/splash.png"), onboarding1, onboarding2];
+YellowBox.ignoreWarnings(['Require cycle:']);
+
+
+// tslint:disable-next-line: no-var-requires
+const assets = [require('./assets/splash.png'), onboarding1, onboarding2];
 
 export default function App() {
   return (

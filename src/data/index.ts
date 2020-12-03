@@ -1,1 +1,1 @@
-export {slides} from "./slide";
+export { slides } from './slide';

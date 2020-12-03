@@ -1,5 +1,5 @@
-export { default as Error } from "./Error";
-export { Footer, FooterAction, FooterText } from "./Footer";
-export { default as FormContainer } from "./FormContainer";
-export { TextInput, TextInputContainer } from "./TextInput";
+export * from './Error';
+export * from './Footer';
+export * from './FormContainer';
+export { TextInput, TextInputContainer } from './TextInput';
 

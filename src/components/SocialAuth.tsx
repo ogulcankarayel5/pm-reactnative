@@ -1,50 +1,53 @@
-import React, { ReactNode } from "react";
-import { BorderlessButton } from "react-native-gesture-handler";
-import { widthPercentageToDP } from "../hooks/useOrientation";
-import { Box } from "../utils";
+import { widthPercentageToDP } from 'hooks';
+import React from 'react';
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { ChildrenProp } from 'types';
+import { Box } from 'utils';
 
 type SocialIconProps = {
-  children: ReactNode;
-  size: number;
+   
+    size: number;
 };
 
-
-
-export const SocialIcons = ({ children,...props }) => {
-  return (
-    <Box flexDirection="row" justifyContent="space-around" {...props}>
-      {children}
-    </Box>
-  );
+export const SocialIcons = ({ children, ...props }:ChildrenProp) => {
+    return (
+        <Box flexDirection="row" justifyContent="space-around" {...props}>
+            {children}
+        </Box>
+    );
 };
-export const SocialIcon = ({ children, size, ...props }: SocialIconProps) => {
-  return (
-    <Box
-      width={size}
-      height={size}
-      padding="s"
-      backgroundColor="white"
-      borderRadius="l"
-      elevation={5}
-      justifyContent="center"
-      alignItems="center"
-      {...props}
-    >
-      {children}
-    </Box>
-  );
+export const SocialIcon = ({ children, size, ...props }: SocialIconProps & ChildrenProp) => {
+    return (
+        <Box
+            width={size}
+            height={size}
+            padding="s"
+            backgroundColor="white"
+            borderRadius="l"
+            elevation={5}
+            justifyContent="center"
+            alignItems="center"
+            {...props}
+        >
+            {children}
+        </Box>
+    );
 };
 
-const defaultProps = {size:widthPercentageToDP("12%")}
+const defaultProps = { size: widthPercentageToDP('12%') };
 
-SocialIcon.defaultProps = defaultProps
+SocialIcon.defaultProps = defaultProps;
 
-export const SocialIconButton = ({ onPress, children, ...props }) => {
-  return (
-    <BorderlessButton {...{ onPress }}>
-      <SocialIcon {...props}>{children}</SocialIcon>
-    </BorderlessButton>
-  );
+type SocialIconButtonProps = {
+    onPress:() => void;
+}
+
+export const SocialIconButton = ({ onPress, children, ...props }:SocialIconButtonProps & ChildrenProp) => {
+    return (
+        <BorderlessButton {...{ onPress }}>
+            <SocialIcon {...props}>{children}</SocialIcon>
+        </BorderlessButton>
+    );
 };
 
-SocialIconButton.defaultProps = defaultProps
+SocialIconButton.defaultProps = defaultProps;

@@ -1,4 +1,3 @@
-export { fonts } from "./fonts"
-export { onboarding1, onboarding2 } from "./images"
-export * from "./strings"
-
+export { fonts } from './fonts';
+export { onboarding1, onboarding2 } from './images';
+export * from './strings';
