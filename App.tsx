@@ -1,5 +1,5 @@
 import { LoadAssets } from 'components';
-import { fonts, onboarding1, onboarding2 } from 'constants';
+import { fonts, itemKey, onboarding1, onboarding2 } from 'constants';
 import { LoadNavigation } from 'navigation';
 import React from 'react';
 import { YellowBox } from 'react-native';
@@ -13,7 +13,7 @@ YellowBox.ignoreWarnings(['Require cycle:']);
 
 
 // tslint:disable-next-line: no-var-requires
-const assets = [require('./assets/splash.png'), onboarding1, onboarding2];
+const assets = [require('./src/assets/splash.png'), onboarding1, onboarding2,itemKey];
 
 export default function App() {
   return (

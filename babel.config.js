@@ -17,7 +17,7 @@ module.exports = function (api) {
       [
         "module-resolver",
         {
-          root: ["."],
+          root: ["./src"],
           extensions: [
             ".ios.ts",
             ".android.ts",
@@ -30,7 +30,8 @@ module.exports = function (api) {
             ".json",
           ],
           alias: {
-            "assets": "./assets",
+            "assets": "/assets",
+            "navigation":"./src/navigation",
             "components": "./src/components",
             "constants": "./src/constants",
             "data": "./src/data",

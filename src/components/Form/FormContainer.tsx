@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Box, Text } from 'utils';
 import { SafeAreaView } from '../SafeAreaView';
 
+
 type FormContainerProps = {
     title: string;
     children: ReactNode;
@@ -17,7 +18,7 @@ export const FormContainer = ({ title, children, footer }: FormContainerProps) =
                 <Box flex={1} backgroundColor="white">
                     <Box flex={0.2} alignItems="center" justifyContent="center">
                         <Image
-                            source={require('../../../assets/splash.png')}
+                            source={require('../../assets/splash.png')}
                             style={{ width: 300, height: 80 }}
                         />
                     </Box>

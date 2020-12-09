@@ -3,16 +3,16 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { AuthActionTypes, authReducer } from '../auth';
 import { ErrorActionTypes, errorReducer } from '../error';
-import { searchReducer, visibilityFilter } from '../search/reducer';
+import { filterReducer } from '../search/reducer';
+import { FilterActionTypes } from '../search/types';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
     errors: errorReducer,
-    search: searchReducer,
-    visibilityFilter,
+    filter:filterReducer
 });
 
-export type AppActions = AuthActionTypes | ErrorActionTypes;
+export type AppActions = AuthActionTypes | ErrorActionTypes | FilterActionTypes;
 
 export type AppState = ReturnType<typeof rootReducer>;
 

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+
 import { Dimensions, PixelRatio } from 'react-native';
 
-type Orientation = 'portrait' | 'landscape' | null;
+
 
 export let { width, height } = Dimensions.get('window');
 
@@ -43,36 +43,4 @@ export const heightPercentageToDP = (
     // Use PixelRatio.roundToNearestPixel method in order to round the layout
     // size (dp) to the nearest one that correspons to an integer number of pixels.
     return PixelRatio.roundToNearestPixel((height * elemHeight) / 100);
-};
-
-export const currentOrientation = (): 'portrait' | 'landscape' => {
-    const isPortrait = height > width;
-    if (isPortrait) {
-        return 'portrait';
-    } else {
-        return 'landscape';
-    }
-};
-
-export const useOrientation = () => {
-    const [orientation, setOrientation] = useState<Orientation>(null);
-
-    useEffect(() => {
-        setOrientation(currentOrientation());
-
-        Dimensions.addEventListener('change', (newDimensions) => {
-            width = newDimensions.window.width;
-            height = newDimensions.window.height;
-            const orientation: Orientation =
-                width < height ? 'portrait' : 'landscape';
-            setOrientation(orientation); // can be used with this height and width
-
-            // console.log(newDimensions.window);
-        });
-
-        // tslint:disable-next-line: no-empty
-        return () => Dimensions.removeEventListener('change', () => {});
-    });
-
-    return { orientation, width, height };
 };

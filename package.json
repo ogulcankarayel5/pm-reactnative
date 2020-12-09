@@ -11,11 +11,11 @@
     "eject": "expo eject",
     "svgr": "svgr ./assets/icons -d ./src/components/icons --native --svg-props className= --svgo-config .svgorc.json",
     "lint": "tslint --project tsconfig.json",
-    "prettier-format":"prettier --write src/**/*.{ts,tsx}"
-    
+    "prettier-format": "prettier --write src/**/*.{ts,tsx}"
   },
   "dependencies": {
     "@react-native-community/async-storage": "~1.11.0",
+    "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/hooks": "^2.6.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.10.6",

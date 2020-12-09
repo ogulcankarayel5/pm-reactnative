@@ -2,6 +2,7 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
+
 export type AppRoutes = {
     Authentication: undefined;
     Home: undefined;
@@ -17,11 +18,12 @@ export type HomeRoutes = {
     Vault: undefined;
     Add: undefined;
     Password: undefined;
+
 };
 
 export type VaultRoutes = {
     Vault: undefined;
-    Deneme2: undefined;
+    ItemDetail: {id:any};
 };
 
 export interface AuthNavigationProps<

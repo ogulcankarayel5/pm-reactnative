@@ -1,3 +1,4 @@
 export { fonts } from './fonts';
-export { onboarding1, onboarding2 } from './images';
+export { itemKey, onboarding1, onboarding2 } from './images';
 export * from './strings';
+

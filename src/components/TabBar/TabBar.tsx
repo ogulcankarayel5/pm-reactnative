@@ -180,7 +180,7 @@ type IconProps = {
 const Icon = ({ name, color }: IconProps) => (
     <Ionicons
         name={`${Platform.OS === 'ios' ? 'ios' : 'md'}-${name}`}
-        size={widthPercentageToDP(9)}
+        size={widthPercentageToDP(8)}
         color={color}
     />
 );

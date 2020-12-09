@@ -3,16 +3,17 @@ import {
     createStackNavigator,
     StackNavigationOptions
 } from '@react-navigation/stack';
+import { TabBar } from 'components';
+import { widthPercentageToDP } from 'hooks';
 import React from 'react';
-import { ChildrenProp } from 'types';
-import { TabBar } from '../components';
-import { widthPercentageToDP } from '../hooks/useOrientation';
-import { Vault } from '../screens';
-import { HomeRoutes } from '../types/navigation-type';
-import { Text, Theme, useTheme } from '../utils';
+import { ItemDetail, Vault } from 'screens';
+import { dataList } from 'store';
+import { ChildrenProp, HomeRoutes, VaultRoutes } from 'types';
+import { Text, Theme, useTheme } from 'utils';
+
 
 const HomeBottomNavigator = createBottomTabNavigator<HomeRoutes>();
-const VaultStackNavigator = createStackNavigator();
+const VaultStackNavigator = createStackNavigator<VaultRoutes>();
 const PasswordStackNavigator = createStackNavigator();
 
 export const HomeNavigator = () => {
@@ -42,23 +43,32 @@ export const HomeNavigator = () => {
 const options = (theme: Theme): StackNavigationOptions => {
     return {
         headerTitleAlign: 'center',
-        headerTitle: ({ children }) => <StackHeader>{children}</StackHeader>,
-
+        headerTitle: ({ children,tintColor }) => <StackHeader color={tintColor}>{children}</StackHeader>,
+        headerTintColor:theme.colors.white,
+        headerRightContainerStyle:{marginRight:15},
+        
         gestureEnabled: true,
         gestureDirection: 'horizontal',
-
+        
         headerStyle: {
             elevation: 0,
             backgroundColor: theme.colors.primaryBackgroundColor,
+            
         },
     };
 };
 
-const StackHeader = ({ children }:ChildrenProp) => {
+type StackHeaderProps = {
+    color:string|undefined
+}
+const StackHeader = ({ children,color }:StackHeaderProps & ChildrenProp) => {
+    
+    
+
     return (
         <Text
             fontFamily="CrimsonRegular"
-            color="white"
+            style={{color}}
             fontSize={widthPercentageToDP('4.5%')}
         >
             {children}
@@ -81,6 +91,7 @@ const VaultStack = () => {
                     title: 'Your Passwords',
                 }}
             />
+            <VaultStackNavigator.Screen component={ItemDetail} name="ItemDetail" initialParams={{id:dataList[0].id}}/>
         </VaultStackNavigator.Navigator>
     );
 };

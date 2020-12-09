@@ -49,7 +49,7 @@ export const AnimatedRightSearch = ({
 
     const interpolateWidth = animation.interpolate({
         inputRange: [0, 1],
-        outputRange: [width / 9, width - 40],
+        outputRange: [width / 9, width - 65],
         extrapolate: 'clamp',
     });
     return (
@@ -98,7 +98,7 @@ type SearchProps = {
 export const Search = ({ handleFocus, focus }: SearchProps) => {
     const dispatch = useDispatch();
     const [value, setValue] = useState('');
-    const inputRef = useRef<TextInput>();
+    const inputRef = useRef<TextInput>(null);
     const { width } = useWindowDimensions();
 
     const onHandleFocus = (value: boolean) => {

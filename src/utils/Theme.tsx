@@ -22,6 +22,7 @@ const palette = {
     purple: '#9773FB',
     lightDark: '#131313',
     dark: '#000',
+    darkGrey:'#48494B',
 };
 
 const theme = {
@@ -60,6 +61,8 @@ const theme = {
         tabBarShadowColor: palette.dark,
 
         primaryBackgroundColor: '#1A1A1A',
+
+        radioButtonInActiveColor:palette.darkGrey
     },
     spacing: {
         none: 0,
