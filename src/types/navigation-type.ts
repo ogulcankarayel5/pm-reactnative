@@ -17,7 +17,7 @@ export type AuthenticationRoutes = {
 export type HomeRoutes = {
     Vault: undefined;
     Add: undefined;
-    Password: undefined;
+    GeneratePassword: undefined;
 
 };
 
@@ -25,6 +25,10 @@ export type VaultRoutes = {
     Vault: undefined;
     ItemDetail: {id:any};
 };
+
+export type GeneratePasswordRoutes = {
+    Generate:undefined;
+}
 
 export interface AuthNavigationProps<
     RouteName extends keyof AuthenticationRoutes

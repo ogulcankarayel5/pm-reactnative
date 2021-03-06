@@ -67,6 +67,7 @@ export const AnimatedRightSearch = ({
                 }}
             >
                 {children}
+             
             </Animated.View>
         </>
     );

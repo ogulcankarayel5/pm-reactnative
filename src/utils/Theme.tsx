@@ -62,7 +62,10 @@ const theme = {
 
         primaryBackgroundColor: '#1A1A1A',
 
-        radioButtonInActiveColor:palette.darkGrey
+        radioButtonInActiveColor:palette.darkGrey,
+
+        itemSecondaryTextColor:'#575757',
+        itemDetailImageBackgroundColor:'#151517'
     },
     spacing: {
         none: 0,
@@ -128,6 +131,18 @@ const theme = {
             fontSize: widthPercentageToDP(3.3),
             fontFamily: 'CrimsonRegular',
         },
+        itemText:{
+            color:'white',
+            fontSize:widthPercentageToDP(4),
+            fontWeight:'bold',
+            fontFamily:'Rouge'
+        },
+        itemSecondaryText:{
+            fontFamily:'Rouge',
+            fontSize:widthPercentageToDP(3.3),
+            color:'itemSecondaryTextColor',
+            fontWeight:'bold' 
+        }
     },
     // cardVariants: {
     //   regular: {

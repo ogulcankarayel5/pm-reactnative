@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 type Size = 'small' | 'medium' | 'large';
-export type Style = ViewStyle | ImageStyle | TextStyle;
+export type Style = ViewStyle;
 interface ButtonProps extends TouchableOpacityProps {
     onPress: () => void;
     children: string;
@@ -73,7 +73,7 @@ export const Button = React.memo(
                         padding: theme.borderRadii.m,
                         backgroundColor: bgColor,
                         width,
-                    },
+                    }as ViewStyle,
                     { ...style },
                 ]}
             >

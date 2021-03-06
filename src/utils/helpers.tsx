@@ -1,12 +1,17 @@
-export const filterSearchData = (searchData, text) => {
-    const result1 = searchData.filter((t) =>
-        t.name.toLowerCase().includes(text.toLowerCase())
-    );
+import { Alert, Clipboard, Platform, ToastAndroid } from 'react-native';
 
-    return result1;
-};
 
-export const filterStatus = (data, status) => {
-    const result = data.filter((e) => e.status === status);
-    return result;
-};
+export const notify = (message:string) => {
+    const info:string = 'Coppied to clipboard'
+    Clipboard.setString(message);
+    if(Platform.OS!=='android'){
+        Alert.alert(info,message)
+    }
+    else{
+        ToastAndroid.showWithGravity(
+            info,
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
+        );
+    }
+}

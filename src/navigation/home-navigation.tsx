@@ -6,15 +6,15 @@ import {
 import { TabBar } from 'components';
 import { widthPercentageToDP } from 'hooks';
 import React from 'react';
-import { ItemDetail, Vault } from 'screens';
+import { Generate, ItemDetail, Vault } from 'screens';
 import { dataList } from 'store';
-import { ChildrenProp, HomeRoutes, VaultRoutes } from 'types';
+import { ChildrenProp, GeneratePasswordRoutes, HomeRoutes, VaultRoutes } from 'types';
 import { Text, Theme, useTheme } from 'utils';
 
 
 const HomeBottomNavigator = createBottomTabNavigator<HomeRoutes>();
 const VaultStackNavigator = createStackNavigator<VaultRoutes>();
-const PasswordStackNavigator = createStackNavigator();
+const GeneratePasswordStackNavigator = createStackNavigator<GeneratePasswordRoutes>();
 
 export const HomeNavigator = () => {
     const theme = useTheme();
@@ -33,8 +33,8 @@ export const HomeNavigator = () => {
                 {() => null}
             </HomeBottomNavigator.Screen>
             <HomeBottomNavigator.Screen
-                component={PasswordStack}
-                name="Password"
+                component={GeneratePasswordStack}
+                name="GeneratePassword"
             />
         </HomeBottomNavigator.Navigator>
     );
@@ -47,9 +47,7 @@ const options = (theme: Theme): StackNavigationOptions => {
         headerTintColor:theme.colors.white,
         headerRightContainerStyle:{marginRight:15},
         
-        gestureEnabled: true,
-        gestureDirection: 'horizontal',
-        
+        cardStyle:{backgroundColor:'#1A1A1A'},
         headerStyle: {
             elevation: 0,
             backgroundColor: theme.colors.primaryBackgroundColor,
@@ -96,16 +94,13 @@ const VaultStack = () => {
     );
 };
 
-const PasswordStack = () => {
+const GeneratePasswordStack = () => {
     const theme = useTheme();
 
     return (
-        <PasswordStackNavigator.Navigator screenOptions={() => options(theme)}>
-            <PasswordStackNavigator.Screen component={Example} name="Add" />
-        </PasswordStackNavigator.Navigator>
+        <GeneratePasswordStackNavigator.Navigator screenOptions={() => options(theme)}>
+            <GeneratePasswordStackNavigator.Screen component={Generate} name="Generate" options={{title:'Generate Password'}} />
+        </GeneratePasswordStackNavigator.Navigator>
     );
 };
 
-const Example = () => {
-    return null;
-};

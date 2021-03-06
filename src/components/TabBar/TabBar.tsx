@@ -5,15 +5,17 @@ import {
     Ionicons
 } from '@expo/vector-icons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { heightPercentageToDP, widthPercentageToDP } from 'hooks';
+import { useResponsiveProp } from '@shopify/restyle';
+import { heightPercentageToDP } from 'hooks';
 import React, { ReactNode, useState } from 'react';
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChildrenProp } from 'types';
 import { Box, Theme } from 'utils';
-import { TabPrimaryButton, TabPrimaryButtonContainer } from "./TabPrimaryButton";
-import { TabSecondaryButton } from "./TabSecondaryButton";
-
-
+import {
+    TabPrimaryButton,
+    TabPrimaryButtonContainer
+} from './TabPrimaryButton';
+import { TabSecondaryButton } from './TabSecondaryButton';
 
 const childButtons = [
     {
@@ -30,7 +32,12 @@ const childButtons = [
     },
 ];
 
-export function TabBar({ state, descriptors, navigation, ...props }: BottomTabBarProps) {
+export function TabBar({
+    state,
+    descriptors,
+    navigation,
+    ...props
+}: BottomTabBarProps) {
     const { activeBackgroundColor, inactiveBackgroundColor } = props;
 
     // state for add button
@@ -85,7 +92,9 @@ export function TabBar({ state, descriptors, navigation, ...props }: BottomTabBa
                                 (isFocused
                                     ? activeBackgroundColor
                                     : inactiveBackgroundColor) as keyof Theme['colors']
+                            
                             }
+                            size={heightPercentageToDP(5)}
                         />
                     </TabBarButton>
                 ) : label === 'Add' ? (
@@ -131,6 +140,7 @@ export function TabBar({ state, descriptors, navigation, ...props }: BottomTabBa
                                     : inactiveBackgroundColor) as keyof Theme['colors']
                             }
                             name="lock"
+                            size={heightPercentageToDP(5)}
                         />
                     </TabBarButton>
                 );
@@ -138,8 +148,6 @@ export function TabBar({ state, descriptors, navigation, ...props }: BottomTabBa
         </Box>
     );
 }
-
-
 
 type TabBarButtonProps = {
     children: ReactNode;
@@ -175,12 +183,22 @@ const TabAddButtonContainer = ({
 
 type IconProps = {
     name: string;
-    color: keyof Theme['colors'];
+    color?:string;
+    size?:number
 };
-const Icon = ({ name, color }: IconProps) => (
-    <Ionicons
-        name={`${Platform.OS === 'ios' ? 'ios' : 'md'}-${name}`}
-        size={widthPercentageToDP(8)}
-        color={color}
-    />
-);
+export const Icon = ({ name,size,color='white',...props }: IconProps) => {
+    const iconSize = useResponsiveProp({
+        phone: 28,
+        tablet: 56,
+    });
+    return (
+        <Ionicons
+            name={`${Platform.OS === 'ios' ? 'ios' : 'md'}-${name}`}
+            size={size ? size : iconSize as number}
+            color={color}
+            
+            {...props}
+            
+        />
+    );
+};

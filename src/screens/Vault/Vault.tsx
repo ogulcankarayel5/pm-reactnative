@@ -1,6 +1,7 @@
 import { heightPercentageToDP } from 'hooks';
 import React, { useCallback, useState } from 'react';
 import {
+
     FlatList,
     Platform,
     ScrollView
@@ -25,7 +26,7 @@ const listTabs = [
 export const Vault = ({ navigation }: VaultStackNavigationProps<'Vault'>) => {
     const filteredData = useSelector(getList, shallowEqual);
     const [focus, setFocus] = useState(false);
-
+  
     const getItemLayout = useCallback(
         (_, index) => ({
             length: heightPercentageToDP(7.5),
@@ -62,12 +63,15 @@ export const Vault = ({ navigation }: VaultStackNavigationProps<'Vault'>) => {
         });
     }, [navigation, focus]);
     return (
-        <Box style={{ flex: 1, backgroundColor: '#1A1A1A' }}>
-            <Box style={{ marginTop: 25 }}>
-                <ScrollView
+        <Box style={{ flex: 1 }}>
+          
+           <Box style={{ marginTop: 25}}>
+               
+               <ScrollView
                     style={{
                         paddingHorizontal: Platform.OS === 'android' ? 20 : 0,
                     }}
+                    
                     horizontal={true}
                     contentInset={{ top: 0, left: 5, right: 5, bottom: 0 }}
                     snapToAlignment="center"
@@ -81,10 +85,13 @@ export const Vault = ({ navigation }: VaultStackNavigationProps<'Vault'>) => {
                         );
                     })}
                 </ScrollView>
+            
             </Box>
+           
 
-            <Box flex={1} marginTop="l">
+            <Box flex={1} marginTop="s">
                 <FlatList
+                    contentContainerStyle={{paddingBottom:50}}
                     getItemLayout={getItemLayout}
                     updateCellsBatchingPeriod={35}
                     windowSize={13}

@@ -2,56 +2,50 @@ import { FontAwesome5 } from '@expo/vector-icons';
 // Using Clipboard
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useResponsiveProp } from '@shopify/restyle';
 import React from 'react';
-import { Clipboard, ToastAndroid, TouchableOpacity } from 'react-native';
-import { VaultRoutes } from 'types';
-import { Box, Text } from 'utils';
+import { TouchableOpacity } from 'react-native';
+import { BaseProps, BaseTextProps, ChildrenProp, VaultRoutes } from 'types';
+import { Box, notify, Text } from 'utils';
+
 
 export const Item = React.memo(
     ({ icon, title, id }: any) => {
         const navigation = useNavigation<
             StackNavigationProp<VaultRoutes, 'ItemDetail'>
         >();
+
+       
         const copy = () => {
-            Clipboard.setString(title);
-            ToastAndroid.showWithGravity(
-                'Coppied to clipboard',
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER
-            );
+           notify(title)
         };
 
         const navigate = () => {
             navigation.navigate('ItemDetail', { id });
         };
-        return (
-            <Box
-                flexDirection="row"
-                paddingHorizontal="l"
-                justifyContent="space-between"
-                alignItems="center"
-                style={{ marginTop: 35 }}
-            >
-                <TouchableOpacity style={{ flex: 1 }} onPress={navigate}>
-                    <Box flexDirection="row" alignItems="center">
-                        <ItemIcon name={icon} size={28}/>
 
-                        <Box marginLeft="l">
-                            <Text variant="stackHeader">{title}</Text>
-                            <Text
-                                fontSize={15}
-                                fontFamily="CrimsonRegular"
-                                style={{ color: '#575757' }}
-                            >
-                                Last update: 03/06/2020
-                            </Text>
-                        </Box>
-                    </Box>
+
+
+        return (
+            <ItemContainer>
+                <TouchableOpacity style={{ flex: 1 }} onPress={navigate}>
+                    <ItemBodyContainer>
+                        <ItemIconContainer>
+                            <ItemIcon name={icon} />
+                        </ItemIconContainer>
+                        <ItemTextContainer>
+                            <ItemTitle>{title}</ItemTitle>
+                            <ItemText>Last update : 06/10/2020</ItemText>
+                        </ItemTextContainer>
+                    </ItemBodyContainer>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={copy}>
-                    <FontAwesome5 name="copy" size={28} color="white" />
-                </TouchableOpacity>
-            </Box>
+
+                <ItemIconContainer >
+                    <TouchableOpacity onPress={copy}>
+                        <ItemIcon name="copy"  />
+                    </TouchableOpacity>
+                </ItemIconContainer>
+            </ItemContainer>
         );
     },
     (prev, next) => {
@@ -59,11 +53,80 @@ export const Item = React.memo(
     }
 );
 
-export const ItemIcon = ({...props}) => {
+
+
+
+
+type ItemProps = ChildrenProp & BaseProps;
+
+export const ItemContainer = ({ children, ...props }: ItemProps) => {
     return (
-        <FontAwesome5 color="white" {...props} />
-    )
-}
+        <Box
+            flexDirection="row"
+            paddingHorizontal="l"
+            justifyContent="space-between"
+            alignItems="center"
+            style={{ marginTop: 35 }}
+            {...props}
+        >
+            {children}
+        </Box>
+    );
+};
+
+export const ItemBodyContainer = ({ children, ...props }: ItemProps) => {
+    return (
+        <Box flexDirection="row" alignItems="center" flex={1} {...props}>
+            {children}
+        </Box>
+    );
+};
+
+export const ItemIconContainer = ({ children, ...props }: ItemProps) => {
+    return (
+        <Box flex={0.2} alignItems="center" {...props}>
+            {children}
+        </Box>
+    );
+};
+
+export const ItemIcon = ({ ...props }) => {
 
 
+    const iconSize = useResponsiveProp({
+        phone:28,
+        tablet:56
+    })
+    return <FontAwesome5 color="white" size={iconSize} {...props} />;
+};
 
+
+export const ItemTextContainer = ({ children, ...props }: ItemProps) => {
+    return (
+        <Box flex={0.8}  {...props}>
+            {children}
+        </Box>
+    );
+};
+
+type TextProps = {
+    children: string;
+};
+
+type ItemTextProps = TextProps & BaseTextProps;
+
+export const ItemTitle = ({ children, ...props }: ItemTextProps) => {
+    return (
+        <Text variant="itemText" {...props}>
+            {children}
+        </Text>
+    );
+};
+
+export const ItemText = ({ children, ...props }: ItemTextProps) => {
+    return (
+        <Text numberOfLines={3} ellipsizeMode="tail" variant="itemSecondaryText" {...props}>
+            {children}
+        </Text>
+    );
+};
