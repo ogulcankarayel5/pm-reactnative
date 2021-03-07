@@ -58,6 +58,7 @@ export function TabBar({
                 shadowOpacity: 0.1,
                 shadowRadius: 20,
                 elevation: 2,
+                
             }}
         >
             {state.routes.map((route: any, index: number) => {
@@ -159,7 +160,7 @@ const TabBarButton = ({
     ...props
 }: TabBarButtonProps & ChildrenProp) => {
     return (
-        <TouchableOpacity {...{ onPress }} {...props}>
+        <TouchableOpacity style={{zIndex:3}} {...{ onPress }} {...props}>
             {children}
         </TouchableOpacity>
     );

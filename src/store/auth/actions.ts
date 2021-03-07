@@ -1,4 +1,4 @@
-import { androidClientId } from '@env';
+import { androidClientId, iosClientId } from '@env';
 import * as Google from 'expo-google-app-auth';
 import { showMessage } from 'react-native-flash-message';
 import { Dispatch } from 'redux';
@@ -57,11 +57,16 @@ export const loginWithGoogle = () => async (
     dispatch: Dispatch<AuthActionTypes>
 ) => {
     try {
+        console.log("login")
         dispatch(loginRequest());
         // should be added iosId
         const result = await Google.logInAsync({
-            androidClientId
+            
+            androidClientId,
+            iosClientId
+
         });
+        console.log(result)
         if (result.type === 'success') {
             const response = await authService.loginWithGoogle(
                  result.accessToken!

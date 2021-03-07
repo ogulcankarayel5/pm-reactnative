@@ -91,6 +91,7 @@ const theme = {
 
             fontFamily: 'Oswald',
             textAlign: 'center',
+            
         },
         mainText: {
             color: 'primaryText',
@@ -99,6 +100,7 @@ const theme = {
             fontWeight: '700',
             fontSize: widthPercentageToDP('4%'),
             textAlign: 'center',
+            
         },
         button: {
             color: 'mainButtonTextColor',
@@ -112,6 +114,7 @@ const theme = {
             fontSize: widthPercentageToDP('3.2%'),
             fontWeight: 'bold',
             textAlign: 'center',
+            allowFontScaling: false
         },
 
         formTitle: {
@@ -134,14 +137,15 @@ const theme = {
         itemText:{
             color:'white',
             fontSize:widthPercentageToDP(4),
-            fontWeight:'bold',
-            fontFamily:'Rouge'
+            
+            fontFamily:'CrimsonBold'
         },
         itemSecondaryText:{
-            fontFamily:'Rouge',
-            fontSize:widthPercentageToDP(3.3),
+            fontFamily:'CrimsonRegular',
+            fontSize:widthPercentageToDP(3.7),
             color:'itemSecondaryTextColor',
-            fontWeight:'bold' 
+            allowFontScaling: false
+           
         }
     },
     // cardVariants: {

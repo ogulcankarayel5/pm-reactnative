@@ -61,7 +61,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
         <Footer>
             <Box flex={1}>
                 <FooterText>{Form.loginFooterText}</FooterText>
-                <SocialIcons>
+                <SocialIcons >
                     <SocialIconButton onPress={signInWithGoogleAsync}>
                         <İcons8Google />
                     </SocialIconButton>

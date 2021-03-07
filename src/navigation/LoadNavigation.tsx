@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Loading } from 'components';
 import { AppLoading } from 'expo';
 import { useIsFirstLaunch } from 'hooks';
+import { AuthenticationNavigator } from 'navigation';
 import React, { useCallback } from 'react';
 import { Onboarding } from 'screens';
 import { useTypedSelector } from 'store';
@@ -16,7 +17,6 @@ const LoadNavigation = () => {
         loading: state.auth.loading,
         user: state.auth.user,
     }));
-
     const { isFirst, changeValue } = useIsFirstLaunch();
 
     const onDone = useCallback(async () => {
@@ -41,7 +41,14 @@ const LoadNavigation = () => {
         <Loading />
     ) : (
         <AppStack.Navigator headerMode="none">
-            <AppStack.Screen name="Home" component={HomeNavigator} />
+            {user ? (
+                <AppStack.Screen name="Home" component={HomeNavigator} />
+            ) : (
+                <AppStack.Screen
+                    name="Authentication"
+                    component={AuthenticationNavigator}
+                />
+            )}
         </AppStack.Navigator>
     );
 };
